@@ -5,34 +5,52 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>chat</title>
-    <link rel="stylesheet" href="./index.css">
+    <title>Pycode-Helper</title>
+    <link rel="stylesheet" href="css/index.css">
+
 </head>
 
 <body>
     <header>
+        <img src="logo.png" alt="로고">
         <h1>Pycode Helper</h1>
-        <p>파이썬 코드를 수정하거나, 변형하거나, 더 나은 방식으로!</p>
     </header>
     <main>
-        <section id="chatbox"></section>
+        <section class="user_btn">
+            <button>사용해보자!</button>
+        </section>
 
-        <form action="post">
-            <textarea autofocus></textarea>
-            <button type="submit">전송</button>
-        </form>
+        <section class="descripe">
+            <strong>👉 Pycode Helper는?</strong>
+            <dl>
+                <dt>코드 효율성 개선</dt>
+                <dd>사용자의 Python 코드를 분석하여 더 효율적이고 깔끔한 방법으로 수정해주기 때문에, 사용자의 코드 효율성이 향상됩니다.</dd>
+                <dt>다양한 해결방법 학습</dt>
+                <dd>수정된 코드 외에도 다른 방식의 풀이를 제시함으로써 사용자는 다양한 문제 해결 방법을 배울 수 있습니다. <br>이를 통해 프로그래밍 스킬을 향상시킬 수 있습니다.</dd>
+                <dt>인공지능 활용</dt>
+                <dd>OpenAI API를 이용하여 인공지능이 코드 수정 및 제안 과정에 참여하기 때문에, <br>최신 인공지능 기술의 활용을 통해 보다 효율적인 코드 개선이 가능합니다.</dd>
+                <dt>시간 절약</dt>
+                <dd>코드를 직접 수정하거나 다른 사람의 피드백을 기다리는 대신, 즉시 코드 수정과 제안을 받을 수 있습니다. <br>이로 인해 사용자의 시간을 절약할 수 있습니다.</dd>
+            </dl>
+        </section>
     </main>
-    <script src="./index.js" defer type="module"></script>
-    <!-- 코드 하이라이트 -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('strong').click(() => {
+                $('dl').toggle('slow', () => {
+                    const loc = $('dl').offset().top;
+                    const heightLoc = $('dl').outerHeight();
+                    $('html, body').animate({ scrollTop: loc + heightLoc }, 'slow');
+                });
+            });
+        });
 
-    <!-- and it's easy to individually load additional languages -->
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/go.min.js"></script>
-
-    <script>hljs.highlightAll();</script
+        const btn = document.querySelector('button');
+        btn.addEventListener("click", function() {
+            location.href = "user.html"
+        })
+    </script>
 </body>
 
 </html>
