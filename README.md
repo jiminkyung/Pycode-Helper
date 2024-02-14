@@ -17,7 +17,7 @@
 ### 2.1 개발 환경
 
 ### 2.2 배포 URL
-jiminkyung.github.io/Pycode-Helper/
+[jiminkyung.github.io/Pycode-Helper/](https://jiminkyung.github.io/Pycode-Helper/)
 
 
 ## 3. 요구사항 명세와 기능 명세
