@@ -89,25 +89,33 @@ const printQuestion = async () => {
 const printAnswer = (answer) => {
     let p = document.createElement("p");
     p.classList.add("answer");
+
+    if (answer.startsWith('```') && answer.endsWith('```')) {
+        let pre = document.createElement("pre");
+        pre.textContent = answer.slice(3, -3);  // 백틱 제거
+        p.appendChild(pre);
+    } else {
+        p.textContent = answer;
+    }
+
     $chatList.appendChild(p);
     let index = 0;
     
     function typeNextCharacter() {
-        p.textContent += answer.charAt(index);
-        index++;
-        if (index <= answer.length - 1) {
-            let randomInterval = Math.floor(Math.random() * (50 - 1)) + 49; // 50에서 200 사이의 무작위 밀리초
-            setTimeout(typeNextCharacter, randomInterval);
-        } else {
-            p.classList.add("done");
+        if (p.textContent.length < answer.length) {
+            p.textContent += answer.charAt(index);
+            index++;
+            if (index <= answer.length - 1) {
+                let randomInterval = Math.floor(Math.random() * (50 - 1)) + 49; // 1에서 50 사이의 무작위 밀리초
+                setTimeout(typeNextCharacter, randomInterval);
+            } else {
+                p.classList.add("done");
+            }
         }
     }
     
     typeNextCharacter();
 };
-
-
-
 
 
 // api 요청보내는 함수
