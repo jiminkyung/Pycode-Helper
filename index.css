@@ -41,12 +41,12 @@ main {
 
 .answer {
     margin-right: auto;
-    background-color: lightblue;
+    background-color: lightskyblue;
 }
 
 .question {
     margin-left: auto;
-    background-color: dodgerblue;
+    background-color: white
 }
 
 form {
@@ -55,9 +55,10 @@ form {
     gap: 20px;
 }
 
-input {
+textarea {
     flex-grow: 1;
     padding: 15px;
+    resize: none;
 }
 
 button {
@@ -80,3 +81,20 @@ button {
     animation: none;
     content: '';
 }
+
+/* code {
+    white-space: pre;
+    max-width: 850px;
+    max-height: 600px;
+    overflow: auto !important;
+} */
+
+/* pre {
+    padding: 14px;
+    font-size: 1.1rem;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    margin: 2px;
+} */
