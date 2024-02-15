@@ -93,8 +93,9 @@
 
 ### 5.1 와이어프레임
 ![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/8f122572-22f6-470c-b0bb-5be813b88577)
-Pigma로 제작. 상세 디자인은 👇
-[https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=1nMKj2zaEe87V1no-1](https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=hTQBFdfXnNEifatL-1)
+
+- Pigma로 제작. 상세 디자인은 👇
+- [https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=1nMKj2zaEe87V1no-1](https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=hTQBFdfXnNEifatL-1)
 
 ### 5.2 화면 설계
 **테스트 영상(gif)**
