@@ -17,13 +17,13 @@
 ## 2. 개발 환경 및 배포 URL
 
 ### 2.1 개발 환경
-- 사용 툴
+- **사용 툴**
     - VSCode
-- 사용 언어
+- **사용 언어**
     - HTML
     - CSS
     - JS
-- 서비스 배포
+- **서비스 배포**
     - GitHub Pages
 
 ### 2.2 배포 URL
@@ -92,22 +92,22 @@
 ## 5. 와이어프레임 / UI / BM
 
 ### 5.1 와이어프레임
-![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/179d83c0-3cd3-4fb5-86e7-33b124a8a7ad)
-Pigma로 제작. 상세 디자인은 링크 참고.
-https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=1nMKj2zaEe87V1no-1
+![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/8f122572-22f6-470c-b0bb-5be813b88577)
+Pigma로 제작. 상세 디자인은 👇
+[https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=1nMKj2zaEe87V1no-1](https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=hTQBFdfXnNEifatL-1)
 
 ### 5.2 화면 설계
 **테스트 영상(gif)**
-![test](https://github.com/jiminkyung/orm/assets/128216954/1c2c2c86-2dd8-4991-954b-4f4f276ab730)
+![test](https://github.com/jiminkyung/orm/assets/128216954/a01f3d71-074d-42a7-b902-5f608d898e21)
 
 |이미지|이름|설명|
 |---|---|---|
 |![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/70dfdc8d-d088-4fdc-9d49-5e6e1bbc0fd0)|메인 페이지|Pycode-Helper의 첫 화면|
 |![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/4df632ab-98b5-42df-a777-bd196f72b71c)|메인 페이지(펼침)|버튼 밑에 위치한 부분을 클릭하면 Pycode-Helper에 대한 간략한 설명이 펼쳐진다.|
-|![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/3c0bafe2-a414-47e4-abfc-dd5ced7f6a9e)|유저 화면|메인 페이지에서 '시작하기'버튼을 클릭했을 때 나오는 화면. 입력창을 이용해 Python Code에 대한 질문을 할 수 있고, 사용자와 GPT간의 대화가 화면에 출력된다.|
+|![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/69b936ea-94c5-4e58-94f1-b8d7721b7abf)|유저 화면|메인 페이지에서 '시작하기'버튼을 클릭했을 때 나오는 화면. 입력창을 이용해 Python Code에 대한 질문을 할 수 있고, 사용자와 GPT간의 대화가 화면에 출력된다.|
 
 
-## 7. Architecture
+## 6. Architecture
 ```mermaid
     graph LR
     A[사용자] -->|Python 코드 입력| B[웹 서비스]
@@ -117,14 +117,23 @@ https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node
 ```
 
 
-## 9. 에러와 에러 해결
+## 7. 에러와 에러 해결
 - 타이핑 + 커서 깜빡임 효과
-- textarea에 여러줄을 입력 시 입력창은 늘어나지 않고 스크롤바가 생성됨.
+    - 타이핑효과는 문자열을 랜덤한 간격으로 하나씩 출력.
+    - 각 글자의 ::after에 커서 모양 문자를 붙여준다. 불투명도와 애니메이션 효과로 깜빡이는 커서 효과 생성.
+    - 하지만 답변에 코드블럭이 섞여 있을경우 커서 위치에 에러가 생긴다.(해결 X)
+- textarea에 여러줄을 입력 시 스크롤바만 생성되고 입력창의 크기는 그대로다.
     - 스크롤 높이마다 px값을 부여한 값을 textarea 높이값으로 할당
-- 학습용 json data의 양이 너무 많아 토큰의 맥시멈을 초과함
-    - json data 절반 삭제...
+    - 제출 후 원래의 높이값으로 초기화
+- 학습용 json 데이터의 양이 토큰의 맥시멈을 초과함
+    - json 데이터 절반 삭제...
 
 
-## 10. 개발하며 느낀점
-아침이 오기 전
-
+## 8. 개발하며 느낀점
+- JS공부 다시 해야겠다.
+- 주말에 시작했어야 했는데, 하는 아쉬움.
+- 차별성을 주지 못해 찝찝하다. GPT랑 비교해서 이 웹서비스만의 좋은점이 명확하게 드러나야 했는데 그러질 못했던것같다.
+- AI 기술에 '의존'하는게 아닌 잘 '이용'해야겠다!
+    - Chat GPT를 이용하면 더 쉽고 빠르게 구현할 수 있다.
+    - 그러다보니 조그마한 문제도 바로 GPT에게 물어보게 된다.
+- 좋은 Tool들이 정말 많이 나왔다.
