@@ -35,6 +35,7 @@ pass
  ┃ ┣ 📜index.css
  ┃ ┗ 📜user.css
  ┣ 📂js
+ ┃ ┣ 📜data.js
  ┃ ┗ 📜user.js
  ┣ 📜index.html
  ┣ 📜logo.png
