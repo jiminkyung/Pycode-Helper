@@ -35,16 +35,7 @@ $input.addEventListener("input", function() {
 let question;
 
 // 질문과 답변 저장
-let data = [
-    {
-    role: "system",
-    content: "assistant는 user의 Python coding에 도음을 주는 친절한 답변가이다.",
-    },
-    // {
-    //   role: "user",
-    //   content: ""
-    // }
-];
+import data from './data.js';
 
 // 화면에 뿌려줄 데이터, 질문들
 let questionData = [];

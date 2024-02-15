@@ -5,6 +5,15 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Medium.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
 html,
 body {
     margin: 0;
@@ -33,7 +42,7 @@ img {
 }
 
 header h1 {
-    font-family: Consolas;
+    font-family: 'JetBrains Mono';
     font-size: 400%;
     color: #00FF00;
     opacity: 0.8;
