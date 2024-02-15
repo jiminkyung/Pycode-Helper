@@ -17,13 +17,35 @@
 ## 2. 개발 환경 및 배포 URL
 
 ### 2.1 개발 환경
+- 사용 툴
+    - VSCode
+- 사용 언어
+    - HTML
+    - CSS
+    - JS
+- 서비스 배포
+    - GitHub Pages
 
 ### 2.2 배포 URL
 [jiminkyung.github.io/Pycode-Helper/](https://jiminkyung.github.io/Pycode-Helper/)
 
 
 ## 3. 요구사항 명세와 기능 명세
-pass
+```mermaid
+    sequenceDiagram
+    actor 사용자 as 사용자
+    participant 웹서비스 as 웹 서비스
+    participant API as OpenAI API
+
+    사용자->>웹서비스: Python 코드 입력
+    Note over 사용자,웹서비스: 입력 데이터 확인
+    웹서비스-->>사용자: 입력 데이터 없음 (if applicable)
+    웹서비스->>API: 입력 데이터 전송 (if applicable)
+    API->>웹서비스: 질문에 맞는 답변 생성 후 전달
+    Note over 웹서비스, 사용자: 답변 출력
+    사용자-->>웹서비스: 추가 질문 있음 (if applicable)
+    Note over 사용자, 웹서비스: 과정 반복 (if applicable)
+```
 
 
 ## 4. 프로젝트 구조와 개발 일정
@@ -34,11 +56,13 @@ pass
  ┣ 📂css
  ┃ ┣ 📜index.css
  ┃ ┗ 📜user.css
+ ┣ 📂img
+ ┃ ┣ 📜git_icon.png
+ ┃ ┗ 📜logo.png
  ┣ 📂js
  ┃ ┣ 📜data.js
  ┃ ┗ 📜user.js
  ┣ 📜index.html
- ┣ 📜logo.png
  ┗ 📜user.html
 ```
 ### 4.1 개발 일정(WBS)
@@ -68,28 +92,39 @@ pass
 ## 5. 와이어프레임 / UI / BM
 
 ### 5.1 와이어프레임
-pass
+![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/179d83c0-3cd3-4fb5-86e7-33b124a8a7ad)
+Pigma로 제작. 상세 디자인은 링크 참고.
+https://www.figma.com/file/DlRtPOel1X6r2R9eJzlrqt/Pycode-Helper?type=design&node-id=13%3A28&mode=design&t=1nMKj2zaEe87V1no-1
 
 ### 5.2 화면 설계
-pass
+**테스트 영상(gif)**
+![test](https://github.com/jiminkyung/orm/assets/128216954/1c2c2c86-2dd8-4991-954b-4f4f276ab730)
 
-
-## 6. 데이터베이스 모델링(ERD)
-pass
+|이미지|이름|설명|
+|---|---|---|
+|![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/70dfdc8d-d088-4fdc-9d49-5e6e1bbc0fd0)|메인 페이지|Pycode-Helper의 첫 화면|
+|![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/4df632ab-98b5-42df-a777-bd196f72b71c)|메인 페이지(펼침)|버튼 밑에 위치한 부분을 클릭하면 Pycode-Helper에 대한 간략한 설명이 펼쳐진다.|
+|![image](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/3c0bafe2-a414-47e4-abfc-dd5ced7f6a9e)|유저 화면|메인 페이지에서 '시작하기'버튼을 클릭했을 때 나오는 화면. 입력창을 이용해 Python Code에 대한 질문을 할 수 있고, 사용자와 GPT간의 대화가 화면에 출력된다.|
 
 
 ## 7. Architecture
-pass
-
-
-## 8. 메인 기능
-pass
+```mermaid
+    graph LR
+    A[사용자] -->|Python 코드 입력| B[웹 서비스]
+    B -->|입력 데이터 전송| C[OpenAI API]
+    C -->|답변 생성 후 전달| B
+    B -->|답변 출력| A
+```
 
 
 ## 9. 에러와 에러 해결
-pass
+- 타이핑 + 커서 깜빡임 효과
+- textarea에 여러줄을 입력 시 입력창은 늘어나지 않고 스크롤바가 생성됨.
+    - 스크롤 높이마다 px값을 부여한 값을 textarea 높이값으로 할당
+- 학습용 json data의 양이 너무 많아 토큰의 맥시멈을 초과함
+    - json data 절반 삭제...
 
 
 ## 10. 개발하며 느낀점
-pass
+아침이 오기 전
 
