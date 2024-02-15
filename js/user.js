@@ -18,14 +18,41 @@ $banners.forEach(($banner) => {
 
 // 각 태그별 변수 지정
 const $form = document.querySelector("form");
-const $input = document.querySelector("textarea");
 const $chatList = document.querySelector("#chatbox");
+const $input1 = document.querySelector("#ipt_code");
+const $input2 = document.querySelector("#ipt_describe");
+
+// 두 입력 필드 값 합치는 함수
+const combineInputs = () => {
+  let input1Value = $input1.value.trim();
+  let input2Value = $input2.value.trim();
+
+  // 둘 다 값이 있을 경우, 두 값을 공백으로 구분하여 합친다.
+  if (input1Value && input2Value) {
+    return input1Value + " " + input2Value;
+  }
+  // 하나의 값만 있을 경우, 해당 값만 반환한다.
+  else if (input1Value) {
+    return input1Value;
+  } else if (input2Value) {
+    return input2Value;
+  }
+  // 둘 다 값이 없을 경우, null을 반환한다.
+  else {
+    return null;
+  }
+};
 
 // openAI API
 let url = `https://open-api.jejucodingcamp.workers.dev/`;
 
 // 입력창 크기 자동조절
-$input.addEventListener("input", function () {
+$input1.addEventListener("input", function () {
+  this.style.height = "1px";
+  this.style.height = this.scrollHeight + "px";
+});
+
+$input2.addEventListener("input", function () {
   this.style.height = "1px";
   this.style.height = this.scrollHeight + "px";
 });
@@ -42,9 +69,19 @@ let questionData = [];
 // 사용자의 질문을 객체를 만들어서 push
 const sendQuestion = (question) => {
   if (question) {
-    data.push({
-      role: "user",
-      content: question,
+    // 질문을 세 부분으로 나눕니다.
+    const parts = [
+      "내가 작성한 코드는 " +
+        question +
+        " 이야. 오류가 있다면 어떤 것인지 알려줘.",
+      question + "에 대한 더 좋은(간결한) 풀이가 있는지 알려줘.",
+      question + "을(를) 다른 방법으로 풀어볼 수 있는 풀이를 제시해줘.",
+    ];
+    parts.forEach((part) => {
+      data.push({
+        role: "user",
+        content: part,
+      });
     });
     questionData.push({
       role: "user",
@@ -197,26 +234,45 @@ const apiPost = async () => {
     });
 };
 
-//  Shift+Enter 줄바꿈 기능
-$input.addEventListener("keydown", function (event) {
+// Shift+Enter 줄바꿈 기능
+$input1.addEventListener("keydown", function (event) {
   if (event.key === "Enter" && !event.shiftKey) {
     // shift키 없이 enter키만 눌렸을 때
     event.preventDefault();
-    question = $input.value;
-    $input.value = null;
-    sendQuestion(question);
-    apiPost();
-    printQuestion();
+    question = combineInputs();
+    $input1.value = $input2.value = null;
+    $input1.style.height = $input2.style.height = 'initial';
+    if (question) {
+      sendQuestion(question);
+      apiPost();
+      printQuestion();
+    }
+  }
+});
+
+$input2.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" && !event.shiftKey) {
+    // shift키 없이 enter키만 눌렸을 때
+    event.preventDefault();
+    question = combineInputs();
+    $input1.value = $input2.value = null;
+    $input1.style.height = $input2.style.height = 'initial';
+    if (question) {
+      sendQuestion(question);
+      apiPost();
+      printQuestion();
+    }
   }
 });
 
 // submit 기능
 $form.addEventListener("submit", function (e) {
   e.preventDefault();
-  if ($input.value.trim() !== "") {
-    // 입력 필드가 비어있지 않을때만 동작
-    question = $input.value;
-    $input.value = null;
+  let combinedInputs = combineInputs();
+  if (combinedInputs) {
+    // 합쳐진 값이 있을 때만 동작
+    question = combinedInputs;
+    $input1.value = $input2.value = null;
     sendQuestion(question);
     apiPost();
     printQuestion();
