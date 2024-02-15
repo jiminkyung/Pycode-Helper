@@ -1,18 +1,17 @@
-
 // 첫 화면에 출력될 답변
 document.addEventListener("DOMContentLoaded", (event) => {
-    let p = document.createElement("p");
-    p.classList.add("answer");
-    p.innerText = `환영합니다!
+  let p = document.createElement("p");
+  p.classList.add("answer");
+  p.innerText = `환영합니다!
     작성하신 코드를 입력해주세요.`;
-    $chatList.appendChild(p);
-    p.classList.add("done");
+  $chatList.appendChild(p);
+  p.classList.add("done");
 });
 
 // 아이콘, 로고 클릭 시 index로 이동
-const $banners = document.querySelectorAll(".banner")
+const $banners = document.querySelectorAll(".banner");
 $banners.forEach(($banner) => {
-  $banner.addEventListener("click", function() {
+  $banner.addEventListener("click", function () {
     location.href = "index.html";
   });
 });
@@ -26,16 +25,16 @@ const $chatList = document.querySelector("#chatbox");
 let url = `https://open-api.jejucodingcamp.workers.dev/`;
 
 // 입력창 크기 자동조절
-$input.addEventListener("input", function() {
+$input.addEventListener("input", function () {
   this.style.height = "1px";
   this.style.height = this.scrollHeight + "px";
-})
+});
 
 // 사용자의 질문
 let question;
 
-// 질문과 답변 저장
-import data from './data.js';
+// 질문과 답변 저장 => data.js에서 import
+import data from "./data.js";
 
 // 화면에 뿌려줄 데이터, 질문들
 let questionData = [];
@@ -87,83 +86,96 @@ const printQuestion = async () => {
     $chatList.appendChild(p);
     questionData = [];
     question = false;
+    // 항상 스크롤 아래에 위치하도록
+    $chatList.scrollTop = $chatList.scrollHeight;
   }
 };
 
 // 화면에 답변 그려주는 함수
 const printAnswer = (answer) => {
-    let p = document.createElement("p");
-    p.classList.add("answer");
+  let p = document.createElement("p");
+  p.classList.add("answer");
 
-    let regex = /```([^`]+)```/g;  // 백틱 안의 문자열을 찾는 정규표현식
-    let match;
-    let lastIndex = 0;
+  let regex = /```([^`]+)```/g; // 백틱 안의 문자열을 찾는 정규표현식
+  let match;
+  let lastIndex = 0;
 
-    while ((match = regex.exec(answer)) !== null) {
-        // 백틱이 시작되기 전까지의 문자열을 p에 추가
-        let textNode = document.createTextNode(answer.slice(lastIndex, match.index));
-        textNode.originalText = textNode.textContent;
-        textNode.textContent = '';
-        p.appendChild(textNode);
+  while ((match = regex.exec(answer)) !== null) {
+    // 백틱이 시작되기 전까지의 문자열을 p에 추가
+    let textNode = document.createTextNode(
+      answer.slice(lastIndex, match.index)
+    );
+    textNode.originalText = textNode.textContent;
+    textNode.textContent = "";
+    p.appendChild(textNode);
 
-        // 백틱 제거 및 문자열 시작 부분의 줄바꿈 제거
-        let content = match[1].replace(/^\n/, '');
-        let pre = document.createElement("pre");
-        let code = document.createElement("code");
-        code.originalText = content;
-        code.textContent = '';
-        pre.appendChild(code);
-        p.appendChild(pre);
+    // 백틱이 시작되는 부분에서 .done 클래스를 추가
+    p.classList.add("done");
 
-        lastIndex = regex.lastIndex;  // 마지막으로 찾은 위치를 저장
-    }
+    // 백틱 제거 및 문자열 시작 부분의 줄바꿈 제거
+    let content = match[1].replace(/^\n/, "");
+    let pre = document.createElement("pre");
+    let code = document.createElement("code");
+    code.originalText = content;
+    code.textContent = "";
+    pre.appendChild(code);
+    p.appendChild(pre);
 
-    // 남은 문자열을 p에 추가
-    let remainingText = answer.slice(lastIndex);
-    if (remainingText.indexOf("```") === -1) {
-        let textNode = document.createTextNode(remainingText);
-        textNode.originalText = textNode.textContent;
-        textNode.textContent = '';
-        p.appendChild(textNode);
-    }
+    lastIndex = regex.lastIndex; // 마지막으로 찾은 위치를 저장
 
-    $chatList.appendChild(p);
+    // 백틱이 끝나는 부분에서 .done 클래스를 삭제
+    p.classList.remove("done");
+  }
 
-    let index = 0;
-    let nodeIndex = 0;
+  // 남은 문자열을 p에 추가
+  let remainingText = answer.slice(lastIndex);
+  if (remainingText.indexOf("```") === -1) {
+    let textNode = document.createTextNode(remainingText);
+    textNode.originalText = textNode.textContent;
+    textNode.textContent = "";
+    p.appendChild(textNode);
+  }
 
-    function typeNextCharacter() {
+  $chatList.appendChild(p);
+
+  let index = 0;
+  let nodeIndex = 0;
+
+  // 타이핑 효과(삭제 고려중)
+  function typeNextCharacter() {
+    if (nodeIndex < p.childNodes.length) {
+      let node = p.childNodes[nodeIndex];
+      let textNode = node.nodeType === Node.TEXT_NODE ? node : node.firstChild;
+
+      if (index < textNode.originalText.length) {
+        textNode.textContent += textNode.originalText.charAt(index);
+        index++;
+
+        // 항상 스크롤 아래에 위치하도록
+        $chatList.scrollTop = $chatList.scrollHeight;
+      }
+
+      if (index < textNode.originalText.length) {
+        let randomInterval = Math.floor(Math.random() * (50 - 1)) + 49; // 1에서 50 사이의 무작위 밀리초
+        setTimeout(typeNextCharacter, randomInterval);
+      } else {
+        index = 0;
+        nodeIndex++;
         if (nodeIndex < p.childNodes.length) {
-            let node = p.childNodes[nodeIndex];
-            let textNode = node.nodeType === Node.TEXT_NODE ? node : node.firstChild;
-            
-            if (index < textNode.originalText.length) {
-                textNode.textContent += textNode.originalText.charAt(index);
-                index++;
-            }
+          typeNextCharacter();
+        } else {
+          p.classList.add("done");
 
-            if (index < textNode.originalText.length) {
-                let randomInterval = Math.floor(Math.random() * (50 - 1)) + 49; // 1에서 50 사이의 무작위 밀리초
-                setTimeout(typeNextCharacter, randomInterval);
-            } else {
-                index = 0;
-                nodeIndex++;
-                if (nodeIndex < p.childNodes.length) {
-                    typeNextCharacter();
-                } else {
-                    p.classList.add("done");
-                    p.querySelectorAll('pre code').forEach((block) => {
-                        hljs.highlightBlock(block);
-                    });
-                }
-            }
+          // <pre><code></code></pre>를 찾아 코드 하이라이트 효과를 부여
+          p.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightBlock(block);
+          });
         }
+      }
     }
-
-    typeNextCharacter();
+  }
+  typeNextCharacter();
 };
-
-
 
 // api 요청보내는 함수
 const apiPost = async () => {
@@ -177,6 +189,7 @@ const apiPost = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
+      console.log(res);
       printAnswer(res.choices[0].message.content);
     })
     .catch((err) => {

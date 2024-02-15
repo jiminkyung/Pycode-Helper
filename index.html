@@ -11,15 +11,17 @@
 
 <body>
     <header>
-        <img src="logo.png" alt="로고">
+        <img src="img/logo.png" alt="로고">
         <h1>Pycode Helper</h1>
     </header>
+
     <main>
         <section class="user_btn">
+            <h2 class="hn-none">user page로 이동</h2>
             <button>사용해보자!</button>
         </section>
-
-        <section class="descripe">
+        <section class="describe">
+            <h3 class="hn-none">Pycode Helper 서비스 설명</h3>
             <strong>👉 Pycode Helper 는?</strong>
             <dl>
                 <dt>코드 효율성 개선</dt>
@@ -33,6 +35,13 @@
             </dl>
         </section>
     </main>
+
+    <footer>
+        <a href="https://github.com/jiminkyung/Pycode-Helper"><img src="img/git_icon.png" alt="깃허브 링크"></a>
+        <p class="gitLink"><-- git link</p>
+        <p>본 서비스는 ChatGPT 3.5를 기반으로 실행됩니다.</p>
+    </footer>
+
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(() => {
@@ -44,9 +53,8 @@
                 });
             });
         });
-
         const btn = document.querySelector('button');
-        btn.addEventListener("click", function() {
+        btn.addEventListener("click", function () {
             location.href = "user.html"
         })
     </script>
