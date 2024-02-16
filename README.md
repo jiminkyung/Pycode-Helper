@@ -104,7 +104,7 @@
 
 ### 5.2 화면 설계
 **테스트 영상(gif)**
-![test](https://github.com/jiminkyung/orm/assets/128216954/a01f3d71-074d-42a7-b902-5f608d898e21)
+![test_smaller](https://github.com/jiminkyung/Pycode-Helper/assets/128216954/429ee6c2-136f-4733-a717-065545ef7045)
 
 |이미지|이름|설명|
 |---|---|---|
